@@ -4,11 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.vision.CameraSource;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,10 +16,10 @@ public class GraphicOverlay extends View {
     private int mPreviewHeight;
     private float mHeightScaleFactor = 1.0f;
     private int mFacing = CameraSource.CAMERA_FACING_BACK;
-    private Set<Graphic> mGraphics = new HashSet<>();
+    private final Set<Graphic> mGraphics = new HashSet<>();
 
     public static abstract class Graphic {
-        private GraphicOverlay mOverlay;
+        private final GraphicOverlay mOverlay;
 
         public Graphic(GraphicOverlay overlay) {mOverlay = overlay;}
 

@@ -4,9 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-
 import androidx.annotation.NonNull;
-
 import com.example.barcodescanner.visionsample.ui.GraphicOverlay;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
@@ -32,7 +30,6 @@ class BarcodeGraphic extends TrackedGraphic<Barcode> {
             Color.GREEN
     };
     private static int mCurrentColorIndex = 0;
-
     private final Paint mRectPaint;
     private final Paint mTextPaint;
     private volatile Barcode mBarcode;
@@ -61,9 +58,7 @@ class BarcodeGraphic extends TrackedGraphic<Barcode> {
     @Override
     public void draw(Canvas canvas) {
         Barcode barcode = mBarcode;
-        if (barcode == null) {
-            return;
-        }
+        if (barcode == null) {return;}
 
         RectF rect = new RectF(barcode.getBoundingBox());
         rect.left = translateX(rect.left);

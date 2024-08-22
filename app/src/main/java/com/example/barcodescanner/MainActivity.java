@@ -3,7 +3,6 @@ package com.example.barcodescanner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,7 +13,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.barcodescanner.databinding.ActivityMainBinding;
 import com.example.barcodescanner.visionsample.SampleActivity;
 import com.google.android.gms.vision.CameraSource;
@@ -70,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         mCameraSource = new CameraSource.Builder(this, mBarcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedFps(35.0f)
                 .setAutoFocusEnabled(true)
                 .build();
 
@@ -87,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+                //
             }
 
             @Override

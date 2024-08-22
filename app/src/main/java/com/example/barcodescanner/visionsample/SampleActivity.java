@@ -13,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import com.example.barcodescanner.R;
 import com.example.barcodescanner.databinding.ActivitySampleBinding;
 import com.example.barcodescanner.visionsample.ui.CameraSourcePreview;
@@ -26,7 +25,6 @@ import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.io.IOException;
 import java.util.Objects;
 
@@ -152,7 +150,6 @@ public class SampleActivity extends AppCompatActivity {
     }
 
     private void startCameraSource() {
-
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getApplicationContext());
         if (code != ConnectionResult.SUCCESS) {
             Dialog dlg = GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);

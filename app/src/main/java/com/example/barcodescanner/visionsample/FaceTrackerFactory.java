@@ -3,9 +3,7 @@ package com.example.barcodescanner.visionsample;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-
 import androidx.annotation.NonNull;
-
 import com.example.barcodescanner.visionsample.ui.GraphicOverlay;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;

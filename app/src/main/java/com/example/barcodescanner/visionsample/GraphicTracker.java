@@ -1,7 +1,6 @@
 package com.example.barcodescanner.visionsample;
 
 import androidx.annotation.NonNull;
-
 import com.example.barcodescanner.visionsample.ui.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Tracker;
