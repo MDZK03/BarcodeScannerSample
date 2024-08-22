@@ -47,8 +47,8 @@ public class SampleActivity extends AppCompatActivity {
         mPreview = binding.preview;
         mGraphicOverlay = (GraphicOverlay) binding.faceOverlay;
 
-        int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        if (rc == PackageManager.PERMISSION_GRANTED) {
+        int check = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        if (check == PackageManager.PERMISSION_GRANTED) {
             createCameraSource();
         } else {
             requestCameraPermission();

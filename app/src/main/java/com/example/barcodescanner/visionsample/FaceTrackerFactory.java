@@ -59,18 +59,11 @@ class FaceGraphic extends TrackedGraphic<Face> {
         mBoxPaint.setStrokeWidth(BOX_STROKE_WIDTH);
     }
 
-    /**
-     * Updates the face instance from the detection of the most recent frame.  Invalidates the
-     * relevant portions of the overlay to trigger a redraw.
-     */
     void updateItem(Face face) {
         mFace = face;
         postInvalidate();
     }
 
-    /**
-     * Draws the face annotations for position, size, and ID on the supplied canvas.
-     */
     @Override
     public void draw(Canvas canvas) {
         Face face = mFace;
