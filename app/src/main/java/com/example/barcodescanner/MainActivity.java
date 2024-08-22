@@ -6,16 +6,17 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.barcodescanner.databinding.ActivityMainBinding;
+import com.example.barcodescanner.visionsample.SampleActivity;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -42,28 +43,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Button btnScan = binding.btnScan;
-        btnScan.setOnClickListener (view -> {
-            btnScan.setVisibility(View.GONE);
-            mCameraPreview.setVisibility(View.VISIBLE);
-            startBarcodeScanner();
-            Toast.makeText(MainActivity.this, "Start Barcode Scanner", Toast.LENGTH_SHORT).show();
+        boolean isCameraPermissible = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+
+        binding.btnSimpleScan.setOnClickListener (view -> {
+            if (!isCameraPermissible) {
+                ActivityCompat.requestPermissions(this,
+                        new String[] { Manifest.permission.CAMERA }, REQUEST_CAMERA);
+            } else {
+                binding.btnSimpleScan.setVisibility(View.GONE);
+                binding.btnSwitchActivity.setVisibility(View.GONE);
+                mCameraPreview.setVisibility(View.VISIBLE);
+                startBarcodeScanner();
+                Toast.makeText(MainActivity.this, "Start Barcode Scanner", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.btnSwitchActivity.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SampleActivity.class);
+            startActivity(intent);
         });
     }
 
     void startBarcodeScanner() {
+        BarcodeDetector mBarcodeDetector =
+                new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
 
-        if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[] { Manifest.permission.CAMERA }, REQUEST_CAMERA);
-            return;
-        }
-
-        BarcodeDetector mBarcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
-
-        mCameraSource = new CameraSource.Builder(this, mBarcodeDetector).setFacing(
-                        CameraSource.CAMERA_FACING_BACK)
+        mCameraSource = new CameraSource.Builder(this, mBarcodeDetector)
+                .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(35.0f)
                 .setAutoFocusEnabled(true)
                 .build();
@@ -72,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("MissingPermission")
             @Override
             public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
-
                 try {
                     mCameraSource.start(mCameraPreview.getHolder());
                 } catch (IOException e) {
@@ -93,8 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         mBarcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
-            public void release() {
-            }
+            public void release() {}
 
             @Override
             public void receiveDetections(@NonNull Detector.Detections<Barcode> detections) {
