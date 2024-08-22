@@ -90,6 +90,7 @@ public class SampleActivity extends AppCompatActivity {
                 new MultiProcessor.Builder<>(barcodeFactory).build());
 
         MultiDetector multiDetector = new MultiDetector.Builder()
+                .add(faceDetector)
                 .add(barcodeDetector)
                 .build();
 
